@@ -6,8 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../createEmotionCache";
 import theme from "../theme";
+import AuthContext from "../context/AuthContext";
 import { Amplify, API, Auth, withSSRContext } from "aws-amplify";
 import awsconfig from "../aws-exports";
+
 Amplify.configure(awsconfig);
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -22,13 +24,16 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
+        <title>Reddit Clone</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthContext>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AuthContext>
     </CacheProvider>
   );
 }
