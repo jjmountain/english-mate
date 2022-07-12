@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-englishmate-dev-153554-authRole",
+      "UnauthRoleArn": "arn:aws:iam::417276652928:role/amplify-englishmate-dev-153554-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::417276652928:role/amplify-englishmate-dev-153554-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-englishmate-dev-153554-deployment",
+      "UnauthRoleName": "amplify-englishmate-dev-153554-unauthRole",
+      "StackName": "amplify-englishmate-dev-153554",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:417276652928:stack/amplify-englishmate-dev-153554/e1e0c440-01ac-11ed-84aa-0aa56aa21807",
+      "AmplifyAppId": "d9ltzwsoh9tkj"
+    },
+    "categories": {
+      "auth": {
+        "englishmate4722b8b1": {}
+      }
+    }
+  }
+}

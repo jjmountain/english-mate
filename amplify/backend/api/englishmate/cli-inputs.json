@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "englishmate",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/jjdevereux/code/english-mate/amplify/backend/api/englishmate/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-07-12T06:40:52.166Z",
+      "keyDescription": "Cool API key"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authenglishmate4722b8b1"
+      }
+    ]
+  }
+}
