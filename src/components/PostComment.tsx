@@ -14,7 +14,7 @@ export default function PostComment({ comment }: Props): ReactElement {
   return (
     <Paper style={{ width: "100%", minHeight: 128, padding: 16, marginTop: 32 }} elevation={2}>
       <Grid container spacing={1} direction="row">
-        <Grid item>
+        <Grid item xs={12}>
           <Typography variant="body1">
             {comment.owner} - {formatDatePosted(comment.createdAt)} hours ago
           </Typography>

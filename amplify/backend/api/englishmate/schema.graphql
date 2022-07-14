@@ -14,8 +14,7 @@ type Post
   title: String!
   contents: String!
   image: String
-  upvotes: Int!
-  downvotes: Int!
+  votes: [Vote!]! @hasMany(indexName: "byVote", fields: ["id"])
   comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
 }
 
@@ -32,4 +31,19 @@ type Comment
   postID: ID! @index(name: "byPost", sortKeyFields: ["content"])
   post: Post @belongsTo(fields: ["postID"])
   content: String!
+}
+
+type Vote
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, update, delete, read] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  # owner:
+  vote: String!
+  postID: ID! @index(name: "byVote", sortKeyFields: ["vote"])
+  post: Post @belongsTo(fields: ["postID"])
 }

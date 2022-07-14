@@ -9,12 +9,39 @@ export const getPost = /* GraphQL */ `
       title
       contents
       image
-      upvotes
-      downvotes
+      votes {
+        items {
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          id
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -40,9 +67,26 @@ export const listPosts = /* GraphQL */ `
         title
         contents
         image
-        upvotes
-        downvotes
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -63,9 +107,26 @@ export const getComment = /* GraphQL */ `
         title
         contents
         image
-        upvotes
-        downvotes
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -94,13 +155,94 @@ export const listComments = /* GraphQL */ `
           title
           contents
           image
-          upvotes
-          downvotes
+          votes {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
         }
         content
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getVote = /* GraphQL */ `
+  query GetVote($id: ID!) {
+    getVote(id: $id) {
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        image
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listVotes = /* GraphQL */ `
+  query ListVotes(
+    $filter: ModelVoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        vote
+        postID
+        post {
+          id
+          title
+          contents
+          image
+          votes {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        id
         createdAt
         updatedAt
         owner

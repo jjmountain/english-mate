@@ -12,12 +12,39 @@ export const createPost = /* GraphQL */ `
       title
       contents
       image
-      upvotes
-      downvotes
+      votes {
+        items {
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          id
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -41,12 +68,39 @@ export const updatePost = /* GraphQL */ `
       title
       contents
       image
-      upvotes
-      downvotes
+      votes {
+        items {
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          id
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -70,12 +124,39 @@ export const deletePost = /* GraphQL */ `
       title
       contents
       image
-      upvotes
-      downvotes
+      votes {
+        items {
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          id
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -102,9 +183,26 @@ export const createComment = /* GraphQL */ `
         title
         contents
         image
-        upvotes
-        downvotes
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -131,9 +229,26 @@ export const updateComment = /* GraphQL */ `
         title
         contents
         image
-        upvotes
-        downvotes
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -160,9 +275,26 @@ export const deleteComment = /* GraphQL */ `
         title
         contents
         image
-        upvotes
-        downvotes
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -170,6 +302,144 @@ export const deleteComment = /* GraphQL */ `
         owner
       }
       content
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createVote = /* GraphQL */ `
+  mutation CreateVote(
+    $input: CreateVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    createVote(input: $input, condition: $condition) {
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        image
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateVote = /* GraphQL */ `
+  mutation UpdateVote(
+    $input: UpdateVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    updateVote(input: $input, condition: $condition) {
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        image
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      id
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteVote = /* GraphQL */ `
+  mutation DeleteVote(
+    $input: DeleteVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    deleteVote(input: $input, condition: $condition) {
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        image
+        votes {
+          items {
+            vote
+            postID
+            id
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      id
       createdAt
       updatedAt
       owner
