@@ -18,7 +18,6 @@ interface IFormInputs {
 }
 
 export default function Login() {
-  const { user, setUser } = useUser();
   const [open, setOpen] = useState(false);
   const [signInError, setSignInError] = useState<string>("");
   const router = useRouter();
@@ -29,9 +28,12 @@ export default function Login() {
   } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    const amplifyUser = await Auth.signIn(data.username, data.password);
-    if (amplifyUser) {
+    try {
+      await Auth.signIn(data.username, data.password);
       router.push("/");
+    } catch (err) {
+      setSignInError(err.message);
+      setOpen(true);
     }
   };
 
@@ -45,32 +47,29 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container direction="column" spacing={3}>
+      <Grid
+        container
+        direction="column"
+        spacing={3}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <Grid item>
           <TextField
             id="username"
-            label="username"
+            label="Username"
             type="text"
             variant="outlined"
             error={errors.username ? true : false}
             helperText={errors.username ? errors.username.message : null}
-            {...register("username", {
-              required: { value: true, message: "Please enter a username" },
-              minLength: {
-                value: 3,
-                message: "Please enter a username between 3-16 characters",
-              },
-              maxLength: {
-                value: 16,
-                message: "Please enter a username between 3-16 characters",
-              },
-            })}
+            {...register("username")}
           />
         </Grid>
         <Grid item>
           <TextField
             id="password"
-            label="password"
+            label="Password"
             type="password"
             variant="outlined"
             error={errors.password ? true : false}
@@ -78,11 +77,7 @@ export default function Login() {
             {...register("password", {
               required: {
                 value: true,
-                message: "Please enter a valid password",
-              },
-              minLength: {
-                value: 8,
-                message: "Please enter a stronger password",
+                message: "Please enter a password",
               },
             })}
           />

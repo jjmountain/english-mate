@@ -1,28 +1,53 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    gradient: true;
+  }
+}
+
 const theme = createTheme({
   palette: {
     background: {
-      paper: "#1b2330",
-      default: "#0d1218",
+      paper: "#fff",
+      default: "#FAFAFA",
     },
     primary: {
-      main: "rgba(2, 106, 167, 1)",
-      contrastText: "#fff",
+      main: "#0091ea",
+      contrastText: "#e3f2fd",
+      light: "#64c1ff",
+      dark: "#0064b7",
     },
     secondary: {
-      main: "rgba(78, 151, 194, 1)",
-      contrastText: "#fff",
+      main: "#fbc02d",
+      light: "#ffff6b",
+      dark: "#c6a700",
+      contrastText: "#263238",
     },
     error: {
       main: "#f44336",
       contrastText: "#fff",
     },
     text: {
-      primary: "#fff",
-      secondary: "rgba(255, 255, 255, 0.7)",
-      disabled: "rgba(255, 255, 255, 0.38)",
+      primary: "rgba(0, 0, 0, 0.87)",
+      secondary: "rgba(0, 0, 0, 0.54)",
+      disabled: "rgba(0, 0, 0, 0.38)",
       //   hint: "rgba(255, 255, 255, 0.38)",
+    },
+  },
+  components: {
+    // Name of the component
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: "gradient" },
+          style: {
+            color: "white",
+            backgroundImage:
+              "linear-gradient(to right top, #0064b7, #1e7bca, #3592dc, #4ca9ee, #64c1ff)",
+          },
+        },
+      ],
     },
   },
   typography: {
@@ -48,32 +73,36 @@ const theme = createTheme({
     ].join(","),
     h1: {
       fontSize: "4rem",
-      fontWeight: 700,
+      fontWeight: 900,
       lineHeight: 1,
-      color: "#fff",
     },
     h2: {
       letterSpacing: "-.025em",
       fontWeight: 700,
       fontSize: "2.25rem",
       lineHeight: 2.5,
-      color: "#fff",
     },
     h3: {
-      color: "#fff",
       fontWeight: 500,
       fontSize: "1.25rem",
       lineHeight: 1.75,
     },
+    h5: {
+      color: "#27272a",
+      fontWeight: 800,
+      fontSize: "1.25rem",
+      lineHeight: 1.75,
+      fontFamily: "Open Sans",
+    },
     body1: {
       fontSize: "1rem",
       lineHeight: 1.75,
-      color: "#d1d5db",
+      color: "rgba(0, 0, 0, 0.87)",
     },
     body2: {
       fontSize: "1rem",
       lineHeight: 1.75,
-      color: "#9CA3AF",
+      color: "rgba(0, 0, 0, 0.54)",
     },
   },
 });

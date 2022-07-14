@@ -93,11 +93,18 @@ export default function Signup() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container direction="column" spacing={3}>
+      <Grid
+        container
+        direction="column"
+        spacing={3}
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
         <Grid item>
           <TextField
             id="username"
-            label="username"
+            label="Username"
             type="text"
             variant="outlined"
             error={errors.username ? true : false}
@@ -118,7 +125,7 @@ export default function Signup() {
         <Grid item>
           <TextField
             id="email"
-            label="email"
+            label="Email"
             type="email"
             variant="outlined"
             error={errors.email ? true : false}
@@ -131,7 +138,7 @@ export default function Signup() {
         <Grid item>
           <TextField
             id="password"
-            label="password"
+            label="Password"
             type="password"
             variant="outlined"
             error={errors.password ? true : false}

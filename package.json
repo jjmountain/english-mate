@@ -13,12 +13,15 @@
     "@aws-amplify/ui-react": "^3.0.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "aws-amplify": "^4.3.27",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.33.1"
+    "react-dropzone": "^14.2.2",
+    "react-hook-form": "^7.33.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",

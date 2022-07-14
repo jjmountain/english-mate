@@ -11,6 +11,9 @@ export const createPost = /* GraphQL */ `
       id
       title
       contents
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -37,6 +40,9 @@ export const updatePost = /* GraphQL */ `
       id
       title
       contents
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -63,6 +69,9 @@ export const deletePost = /* GraphQL */ `
       id
       title
       contents
+      image
+      upvotes
+      downvotes
       comments {
         items {
           id
@@ -92,6 +101,9 @@ export const createComment = /* GraphQL */ `
         id
         title
         contents
+        image
+        upvotes
+        downvotes
         comments {
           nextToken
         }
@@ -118,6 +130,9 @@ export const updateComment = /* GraphQL */ `
         id
         title
         contents
+        image
+        upvotes
+        downvotes
         comments {
           nextToken
         }
@@ -144,6 +159,9 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         contents
+        image
+        upvotes
+        downvotes
         comments {
           nextToken
         }
