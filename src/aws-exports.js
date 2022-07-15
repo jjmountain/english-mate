@@ -3,14 +3,15 @@
 
 const awsmobile = {
   aws_project_region: "ap-northeast-1",
-  aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
+  aws_appsync_graphqlEndpoint:
+    "https://2b2d6auxove6blzy7andnvbq74.appsync-api.ap-northeast-1.amazonaws.com/graphql",
   aws_appsync_region: "ap-northeast-1",
   aws_appsync_authenticationType: "API_KEY",
-  aws_appsync_apiKey: process.env.aws_appsync_apiKey,
-  aws_cognito_identity_pool_id: process.env.aws_cognito_identity_pool_id,
+  aws_appsync_apiKey: "da2-qfp2prl3ojf7lgxqpxfbqwp4te",
+  aws_cognito_identity_pool_id: "ap-northeast-1:9bf0064a-866a-492a-94f2-eb81ac69c0d7",
   aws_cognito_region: "ap-northeast-1",
-  aws_user_pools_id: process.env.aws_user_pools_id,
-  aws_user_pools_web_client_id: process.env.aws_user_pools_web_client_id,
+  aws_user_pools_id: "ap-northeast-1_Q3szuwrwv",
+  aws_user_pools_web_client_id: "2si4b5f54ehi7uekc1jp4kkaj0",
   oauth: {},
   aws_cognito_username_attributes: [],
   aws_cognito_social_providers: [],
@@ -22,7 +23,7 @@ const awsmobile = {
     passwordPolicyCharacters: [],
   },
   aws_cognito_verification_mechanisms: ["EMAIL"],
-  aws_user_files_s3_bucket: process.env.aws_user_files_s3_bucket,
+  aws_user_files_s3_bucket: "englishmatee0e7a514d3df4b3cb14432f7761f2045153554-dev",
   aws_user_files_s3_bucket_region: "ap-northeast-1",
 };
 
