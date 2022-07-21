@@ -49,7 +49,7 @@ export default function Header() {
             </IconButton>
             <Typography
               onClick={() => router.push(`/`)}
-              variant="h5"
+              variant="h6"
               component="div"
               sx={{ display: "inline", marginLeft: 1, cursor: "pointer" }}
             >

@@ -26,7 +26,7 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Reddit Clone</title>
+        <title>Teacher's Torch</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <AuthContext>

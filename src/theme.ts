@@ -79,8 +79,8 @@ const theme = createTheme({
     h2: {
       letterSpacing: "-.025em",
       fontWeight: 700,
-      fontSize: "2.25rem",
-      lineHeight: 2.5,
+      fontSize: "2.5rem",
+      // lineHeight: 2.5,
     },
     h3: {
       fontWeight: 500,
@@ -96,7 +96,7 @@ const theme = createTheme({
     },
     body1: {
       fontSize: "1rem",
-      lineHeight: 1.75,
+      // lineHeight: 1.75,
       color: "rgba(0, 0, 0, 0.87)",
     },
     body2: {

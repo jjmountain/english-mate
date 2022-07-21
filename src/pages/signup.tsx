@@ -32,6 +32,8 @@ export default function Signup() {
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     try {
+      setSignUpError("test error");
+
       if (showCode) {
         confirmSignUp(data);
       } else {
@@ -78,6 +80,7 @@ export default function Signup() {
       }
     } catch (error) {
       console.log("error confirming sign up", error);
+      setSignUpError(error);
     }
   }
 

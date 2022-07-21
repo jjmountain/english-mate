@@ -14,9 +14,12 @@ import {
 import PostPreview from "../../components/PostPreview";
 import PostComment from "../../components/PostComment";
 import { MainContainer } from "../../components/MainContainer";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Typography } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
+import { useRouter } from "next/router";
+import { useUser } from "../../context/AuthContext";
+import Link from "next/link";
 
 type Props = {
   post: Post;
@@ -35,6 +38,9 @@ export default function IndividualPost({ post }: Props): ReactElement {
     handleSubmit,
     reset,
   } = useForm<IFormInput>();
+
+  const { user } = useUser();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data);
@@ -59,39 +65,45 @@ export default function IndividualPost({ post }: Props): ReactElement {
       <>
         <PostPreview post={post} />
         {/* Start rendering comments */}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          autoComplete="off"
-          style={{ marginTop: 32, marginBottom: 32 }}
-        >
-          <Grid container spacing={2} direction="row" alignItems="flex-start">
-            <Grid item sx={{ flexGrow: 1 }}>
-              <TextField
-                variant="outlined"
-                id="comment"
-                label="Add A Comment"
-                type="text"
-                multiline
-                fullWidth
-                error={errors.comment ? true : false}
-                helperText={errors.comment ? errors.comment.message : null}
-                {...register("comment", {
-                  required: { value: true, message: "Please enter a comment." },
-                  maxLength: {
-                    value: 240,
-                    message: "Please enter a comment under 240 characters.",
-                  },
-                })}
-                style={{ width: "100%" }}
-              />
+        {user ? (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            autoComplete="off"
+            style={{ marginTop: 32, marginBottom: 32 }}
+          >
+            <Grid container spacing={2} direction="row" alignItems="flex-start">
+              <Grid item sx={{ flexGrow: 1 }}>
+                <TextField
+                  variant="outlined"
+                  id="comment"
+                  label="Add A Comment"
+                  type="text"
+                  multiline
+                  fullWidth
+                  error={errors.comment ? true : false}
+                  helperText={errors.comment ? errors.comment.message : null}
+                  {...register("comment", {
+                    required: { value: true, message: "Please enter a comment." },
+                    maxLength: {
+                      value: 240,
+                      message: "Please enter a comment under 240 characters.",
+                    },
+                  })}
+                  style={{ width: "100%" }}
+                />
+              </Grid>
+              <Grid item sx={{ position: "relative" }}>
+                <Button variant="contained" color="primary" type="submit" sx={{ marginTop: 1 }}>
+                  Add Comment
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item sx={{ position: "relative" }}>
-              <Button variant="contained" color="primary" type="submit" sx={{ marginTop: 1 }}>
-                Add Comment
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        ) : (
+          <Typography>
+            <Link href="/login">Log in</Link> to post a comment
+          </Typography>
+        )}
 
         {comments
           .sort((a, b) => b.createdAt.localeCompare(a.createdAt))

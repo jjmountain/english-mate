@@ -1,4 +1,4 @@
-import { Box, ButtonBase, Grid, IconButton, Paper, Typography } from "@mui/material";
+import { Box, ButtonBase, Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 import {
   Post,
@@ -12,6 +12,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import formatDatePosted from "../lib/formatDatePosted";
 import { createVote, updateVote } from "../graphql/mutations";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { API, Auth, Storage } from "aws-amplify";
 import { useUser } from "../context/AuthContext";
@@ -66,6 +67,10 @@ export default function PostPreview({ post }: Props): ReactElement {
   }, []);
 
   const addVote = async (voteType: string) => {
+    if (!user) {
+      alert("no user");
+      return;
+    }
     if (existingVote && existingVote != voteType) {
       const updateVoteInput: UpdateVoteInput = {
         id: existingVoteId,
@@ -119,70 +124,68 @@ export default function PostPreview({ post }: Props): ReactElement {
     }
   };
 
-  console.log(post);
-  console.log("Upvotes:", upvotes);
-  console.log("Downvotes:", downvotes);
-
   return (
     <Paper elevation={3}>
-      <Grid
-        container
-        direction="row"
-        alignItems="flex-start"
-        justifyContent="flex-start"
-        spacing={3}
-        style={{ padding: 8, marginTop: 24 }}
-        wrap="nowrap"
-      >
+      <Grid container sx={{ marginBottom: 4, paddingY: 1, width: "100%", display: "flex" }}>
         {/* upvote / downvote */}
-        <Grid item xs="auto" alignItems="center">
-          <Grid container direction="column" alignItems="center">
-            <Grid item>
-              <IconButton color="inherit" onClick={() => addVote("upvote")}>
-                <ArrowUpwardIcon style={{ maxWidth: 24 }} />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <Grid container alignItems="center">
-                <Grid item>
-                  <Typography align="center" variant="h6">
-                    {upvotes - downvotes}
-                  </Typography>
-                  <Typography variant="body2">votes</Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <IconButton color="inherit" onClick={() => addVote("downvote")}>
-                <ArrowDownwardIcon style={{ maxWidth: 24 }} />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </Grid>
-        {/* content preview */}
         <Grid item>
-          <ButtonBase disableRipple onClick={() => router.push(`/post/${post.id}`)}>
-            <Grid container direction="column" alignItems="flex-start">
-              <Grid item style={{ maxHeight: 32, overflowY: "hidden", overflowX: "hidden" }}>
-                <Typography variant="body1">
-                  Posted by <b>{post.owner}</b>{" "}
-                  {formatDatePosted(post.createdAt) === "1"
-                    ? `${formatDatePosted(post.createdAt)} hour ago`
-                    : `${formatDatePosted(post.createdAt)} hours ago`}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h2">{post.title}</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="body1">{post.contents}</Typography>
-              </Grid>
-              {post.image && postImage && (
-                <Grid item>
-                  <Image src={postImage} height={540} width={980} layout="intrinsic" />
-                </Grid>
-              )}
-            </Grid>
+          <Stack paddingX={1} spacing={1}>
+            <IconButton color="inherit" onClick={() => addVote("upvote")}>
+              <ArrowUpwardIcon style={{ maxWidth: 24 }} />
+            </IconButton>
+            <Typography align="center" variant="h6">
+              {upvotes - downvotes}
+            </Typography>
+
+            <IconButton color="inherit" onClick={() => addVote("downvote")}>
+              <ArrowDownwardIcon style={{ maxWidth: 24 }} />
+            </IconButton>
+          </Stack>
+        </Grid>
+
+        {/* content preview */}
+        <Grid item xs={10} sx={{ padding: 1 }}>
+          <ButtonBase
+            sx={{ width: "100%", justifyContent: "flex-start" }}
+            disableRipple
+            onClick={() => router.push(`/post/${post.id}`)}
+          >
+            <Stack spacing={3} sx={{ width: "100%" }}>
+              <Typography textAlign="left" variant="body2">
+                Posted by <b>{post.owner}</b>{" "}
+                {formatDatePosted(post.createdAt) === "1"
+                  ? `${formatDatePosted(post.createdAt)} hour ago`
+                  : `${formatDatePosted(post.createdAt)} hours ago`}
+              </Typography>
+              <Typography textAlign="left" variant="h2">
+                {post.title}
+              </Typography>
+              <Typography textAlign="left" variant="body1">
+                {post.contents}
+              </Typography>
+              <Box
+                sx={{
+                  cursor: "pointer",
+                  marginTop: 5,
+                  display: "flex",
+                  justifyContent: "flex-start",
+                }}
+              >
+                {post.image && postImage && (
+                  // <Link href={postImage}>
+                  <Image
+                    src={postImage}
+                    width={600}
+                    height={600}
+                    loading="eager"
+                    // layout="intrinsic"
+                    objectFit="contain"
+                    objectPosition="relative"
+                  />
+                  // </Link>
+                )}
+              </Box>
+            </Stack>
           </ButtonBase>
         </Grid>
       </Grid>
